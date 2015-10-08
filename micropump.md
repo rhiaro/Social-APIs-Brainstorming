@@ -1,31 +1,60 @@
-# Micropump
+# The Social API
 
-**Disclaimer:** Just kidding about 'micropump', not really trying for a frankenspec with with a new name. This is a strawman skeleton document for what the Social (and Federation) API could look like, taking bits from [ActivityPump](http://w3c-social.github.io/activitypump/) and the Indieweb ecosystem (including [Micropub](http://indiewebcamp.com/Micropub) and [SoLiD](http://linkeddata.github.io/SoLiD/) *as they currently stand*; all are subject to ongoing development. [PRs and issues ~~welcome~~ ~~encouraged~~ necessary](http://www.ludumdare.com/compo/wp-content/uploads/2013/04/i-have-no-idea-what-im-doing-dog.jpg).
+**Editor's note:** Early draft, based on [Social API Requirements](https://www.w3.org/wiki/Socialwg/Social_API/Requirements); inspired by and borrowing from [ActivityPump](http://w3c-social.github.io/activitypump/), the Indieweb ecosystem (including [Micropub](http://indiewebcamp.com/Micropub) and [Webmention](http://indiewebcamp.com/Webmention)) and [SoLiD](http://linkeddata.github.io/SoLiD/); all are subject to ongoing development. PRs and issues please!.
 
 ## Overview
 
-People and the content they create are the core componants of the social web; they make up the social graph. This document describes (eventually) a standard way in which people can:
+People and the content they create are the core componants of the social web; they make up the social graph. This document describes a standard way in which people can:
 
-* create, update and delete social content;
 * connect with other people and subscribe to their content;
+* create, update and delete social content;
 * interact with other people's content;
 * be notified when other people interact with their content;
 
-regardless of what that content is or where it is stored.
+regardless of *what that content* is or *where it is stored*.
 
-This should provide the building blocks for new, interoperable social systems that allow people to express themselves, ideas to be shared, organisations to collaborate, and.. all manner of other exciting things.
+This provides the core building blocks for interoperable social systems which allow people to express themselves, ideas to be shared, organisations to collaborate, and..
 
-## Vocabulary
+This specification is divided into parts that can be implemented independantly as needed, or all together in one system, as well as extended to meet domain-specific requirements. Users can store their social data across any number of compliant servers, and use compliant clients hosted elsewhere to interact with their own content and the content of others. Put simply, this specification tells you:
 
-| ActivityPump | Micropub | SoLiD |
-| ------------ | -------- | ----- |
-| ActivityStreams 2.0 | Microformats2 | Any suitable RDF ontology (eg. FOAF, SIOC) |
+* given an identifier (URI) for a person (persona/organisation/group/other), how to discover content they have published.
+* how to subscribe to a particular stream or feed of content.
+* what to post, and where to, to create, update or delete content.
+* what to post, and where to, to notify relevant parties of changes to content.
+* what to post, and where to, to notify relevant parties of interactions with content.
+* ...
 
-## Syntax
+## Reading
+
+Upon [discovery](#discovery) of the URL of a content object or stream of content:
+
+* a `GET` retrieves the JSON representation of the object or objects in the stream;
+  * in reverse chronological order where applicable;
+  * which MAY be embedded in a HTML representation of the object or objects;
+  * **TODO:** limit/paging
+
+## Subscribing
+
+* follow activity
+* PuSH
+*
+## Discovery
+
+* different types of feeds (by post type, user curated, by topic)
+
+## 'What to post'
+
+### Syntax
 
 | ActivityPump | Micropub | SoLiD |
 | ------------ | -------- | ----- |
 | JSON-LD | form-encoded or JSON | RDF (Turtle or JSON-LD) |
+
+### Vocabulary
+
+| ActivityPump | Micropub | SoLiD |
+| ------------ | -------- | ----- |
+| ActivityStreams 2.0 | Microformats2 | Any suitable RDF ontology (eg. FOAF, SIOC) |
 
 
 ## Authorization
@@ -36,29 +65,13 @@ This should provide the building blocks for new, interoperable social systems th
 
 ### Identity
 
-Not to be over-thought. Terminology:
+* Profiles
 
-| ActivityPump | Micropub | SoLiD |
-| ------------ | -------- | ----- |
-| `Actor` from ActivityStreams2.0 | `author` from microformats2 | `foaf:Agent` maybe? |
+## Creating content
 
-Engage debate: relationship between people (personas, no IRL requirement; or orgs or groups or whatever), profiles (documents about people) and accounts.
+`POST` a JSON object (see [what to post](#what-to-post)) to the appropriate endpoint.
 
-We are *not* trying to re-standardize identity on the web, but we need to be clear about our core assumptions.
-
-## Publishing
-
-### Exposing content
-
-Publish a feed/stream that others can read (subject to permissions).
-
-| ActivityPump | Indieweb |
-| ------------ | -------- |
-| JSON at discoverable `outbox` | HTML page marked up with microformats2 (ie. `h-entry`s inside a `h-feed`) |
-
-### Creating content
-
-`POST` to an endpoint that can suitably handle the data.
+<!--
 
 |              | ActivityPump | Micropub |
 | ------------ | --------------------------------------------- | -------- |
@@ -81,13 +94,13 @@ Publish a feed/stream that others can read (subject to permissions).
 | **Update**   |                                               | |
 | **Delete**   |                                               | |
 
+-->
 
-## Subscribing
+### Updating
 
-* follow activity
-* PuSH
+### Deleting
 
-## Propagating
+## Notifications
 
 ### Propagating content
 
