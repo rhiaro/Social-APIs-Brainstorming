@@ -55,7 +55,7 @@ Each stream must have a globally unique identifier (HTTP URI) and MAY be of type
 
 ## Discovery
 
-One user may [publish](#publishing) one or more streams of content. Streams may be generated automatically or manually, and might be segregated by post type, topic, audience, or any arbitrary criteria decided by the curator of the stream. The result of a `GET` on the HTTP URI of an agent MAY include links to other streams, which a consumer could follow to read or subscribe to. Eg.
+One user may [publish](#publishing) one or more streams of content. Streams may be generated automatically or manually, and might be segregated by post type, topic, audience, or any arbitrary criteria decided by the curator of the stream. The result of a `GET` on the HTTP URI of a [profile](#profiles) MAY include links to other streams, which a consumer could follow to read or subscribe to. Eg.
 
 `<link rel="stream" href="http://rhiaro.co.uk/tag/socialwg">`
 
@@ -98,16 +98,6 @@ Here are some options for indicating this...
 | ------------ | -------- | ----- |
 | ActivityStreams 2.0 | Microformats2 | Any suitable RDF ontology (eg. FOAF, SIOC) |
 
-
-## Authorization
-
-* Bearer tokens for authentication
-* Leave obtaining the bearer token out of the spec, since there are already several RFCs for ways to obtain bearer tokens.
-* ...access control...
-
-### Identity
-
-* Profiles
 
 ## Creating content
 
@@ -152,3 +142,13 @@ Here are some options for indicating this...
 ### Updating the social graph
 
 side effects, adding to collections etc
+
+## Profiles
+
+The subject of a profile document can be a person, persona, organisation, bot, location, ...whatever. Each profile document MUST have a globally unique identifier (HTTP URI). Performing a `GET` on a profile document SHOULD return a JSON object containing attributes of the subject of the profile; MAY return objects the subject has created, such as an ActivityStreams `Collection`; and SHOULD return at least one link to a stream of content (see [discovery](#discovery)). The JSON representation of a profile document MAY be embedded in an HTML representation (eg. an `h-card`).
+
+### Authorization
+
+* Bearer tokens for authentication
+* Leave obtaining the bearer token out of the spec, since there are already several RFCs for ways to obtain bearer tokens.
+* ...access control...
