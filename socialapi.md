@@ -43,10 +43,7 @@ Upon [discovery](#discovery) of the URL of a content object or stream of content
 Each object in a stream MUST have a globally unique identifier (HTTP URI) in the `@id` property, and MAY contain only this identifier, which can be dereferenced to retrieve all properties of an object.
 
 
-<div class="issue">
-  <span class="issue-title">ISSUE</title>
-  <p>Microformats uses `url` not `@id`</p>
-</div>
+<div class="issue"><span class="issue-title">ISSUE</title><p>Microformats uses `url` not `@id`</p></div>
 
 
 **TODO:** Example single object.
