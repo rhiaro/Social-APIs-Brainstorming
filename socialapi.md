@@ -37,7 +37,7 @@ Upon [discovery](#discovery) of the URL of a content object or stream of content
 * a `GET` retrieves the JSON representation of the object or objects in the stream;
   * in reverse chronological order where applicable;
   * which SHOULD be structured according to [ActivityStreams](#) (either Activities or Content Objects);
-  * which MAY be embedded in a HTML representation of the object or objects;
+  * which MAY be embedded in a HTML representation of the object or objects (eg. via Microformats or RDFa);
   * **TODO:** limit/paging
 
 Each stream must have a globally unique identifier (HTTP URI) and MAY be of type ActivityStreams `Collection`. Each object in a stream MUST have a globally unique identifier (HTTP URI) in the `@id` property, and MAY contain only this identifier, which can be dereferenced to retrieve all properties of an object.
@@ -145,7 +145,7 @@ side effects, adding to collections etc
 
 ## Profiles
 
-The subject of a profile document can be a person, persona, organisation, bot, location, ...whatever. Each profile document MUST have a globally unique identifier (HTTP URI). Performing a `GET` on a profile document SHOULD return a JSON object containing attributes of the subject of the profile; MAY return objects the subject has created, such as an ActivityStreams `Collection`; and SHOULD return at least one link to a stream of content (see [discovery](#discovery)). The JSON representation of a profile document MAY be embedded in an HTML representation (eg. an `h-card`).
+The subject of a profile document can be a person, persona, organisation, bot, location, ...whatever. Each profile document MUST have a globally unique identifier (HTTP URI). Performing a `GET` on a profile document SHOULD return a JSON object containing attributes of the subject of the profile; MAY return objects the subject has created, such as an ActivityStreams `Collection`; and SHOULD return at least one link to a stream of content (see [discovery](#discovery)). The JSON representation of a profile document MAY be embedded in an HTML representation (eg. via Microformats (`h-card`) or RDFa).
 
 ### Authorization
 
