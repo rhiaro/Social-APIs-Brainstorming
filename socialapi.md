@@ -23,8 +23,8 @@ This provides the core building blocks for interoperable social systems.
 
 This specification is divided into parts that can be implemented independantly as needed, or all together in one system, as well as extended to meet domain-specific requirements. Users can store their social data across any number of compliant servers, and use compliant clients hosted elsewhere to interact with their own content and the content of others. Put simply, this specification tells you:
 
-* how to publish social content, and how to discover content someone has published.
-* how to subscribe to a particular stream or feed of content.
+* how to [publish](#publishing) social content, and how to [discover](#discovery) content someone has published.
+* how to [subscribe](#subscribing) to a particular stream or feed of content.
 * what to post, and where to, to create, update or delete content.
 * what to post, and where to, to notify relevant parties of changes to content.
 * what to post, and where to, to notify relevant parties of interactions with content.
