@@ -103,6 +103,10 @@ Here are some options for indicating this...
 
 `POST` a JSON object (see [what to post](#what-to-post)) to the appropriate endpoint.
 
+* **Micropub**: `POST` to `rel="micropub"` (*See [Micropub](https://indiewebcamp.com/micropub)*)
+* **ActivityPump**: `POST` to `"outbox": "..."` (*See [ActivityPump 7.4.1](http://w3c-social.github.io/activitypump/#outbox)*)
+* **SoLiD**: `POST` to an LDP container (*See [SoLiD - Creating new resources](https://github.com/solid/solid-spec#creating-new-resources)*)
+
 <!--
 
 |              | ActivityPump | Micropub |
