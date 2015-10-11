@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # The Social API
 
 **Editor's note:** Early draft, based on [Social API Requirements](https://www.w3.org/wiki/Socialwg/Social_API/Requirements); inspired by and borrowing from [ActivityPump](http://w3c-social.github.io/activitypump/), the Indieweb ecosystem (including [Micropub](http://indiewebcamp.com/Micropub) and [Webmention](http://indiewebcamp.com/Webmention)) and [SoLiD](http://linkeddata.github.io/SoLiD/); all are subject to ongoing development. PRs and issues please!.
