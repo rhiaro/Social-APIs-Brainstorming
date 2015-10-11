@@ -40,7 +40,7 @@ Upon [discovery](#discovery) of the URL of a content object or stream of content
   * which MAY be embedded in a HTML representation of the object or objects;
   * **TODO:** limit/paging
 
-Each object in a stream MUST have a globally unique identifier (HTTP URI) in the `@id` property, and MAY contain only this identifier, which can be dereferenced to retrieve all properties of an object.
+Each stream must have a globally unique identifier (HTTP URI) and MAY be of type ActivityStreams `Collection`. Each object in a stream MUST have a globally unique identifier (HTTP URI) in the `@id` property, and MAY contain only this identifier, which can be dereferenced to retrieve all properties of an object.
 
 
 <div class="issue">
@@ -53,6 +53,26 @@ Each object in a stream MUST have a globally unique identifier (HTTP URI) in the
 
 **TODO:** Example stream of objects.
 
+## Discovery
+
+One user may [publish](#publishing) one or more streams of content. Streams may be generated automatically or manually, and might be segregated by post type, topic, audience, or any arbitrary criteria decided by the curator of the stream. The result of a `GET` on the HTTP URI of an agent MAY include links to other streams, which a consumer could follow to read or subscribe to. Eg.
+
+`<link rel="stream" href="http://rhiaro.co.uk/tag/socialwg">`
+
+```
+HTTP/1.1 200 OK
+....
+Link: <http://rhiaro.co.uk/tag/socialwg>; rel="stream"
+```
+
+<div class="issue">
+  <div class="issue-title"><span>Issue</span></div>
+  <div>Strawman. Is 'stream' right or should be 'feed'? Could/should be JSON? How to include additional info, eg. title of stream/feed?</div>
+</div>
+
+* **h-feed**: `rel=feed` (*See [h-feed](http://indiewebcamp.com/h-feed#rel_feed)*)
+* **ActivityPump**: contains some pre-defined ActivityStreams `Collections`, whose URIs are discoverable from the JSON returned by `GET`ing a user's profile, eg. via the `inbox` and `outbox` properties. (*See [ActivityPump - Discovery](http://w3c-social.github.io/activitypump/#endpoint-discovery)*)
+
 ## Subscribing
 
 An agent (client or server) may wish to be notified of changes to a content object (eg. edits, new replies) or stream of content (eg. objects added or removed from the stream).
@@ -63,10 +83,6 @@ Here are some options for indicating this...
 * **SoLiD**: The subscriber sends the keyword `sub` followed by an empty space and then the URI of the resource, to the target's websockets URI. The target's server sends a websockets message containing the keyword `pub`, followed by an empty space and the URI of the resource that has changed, whenever there is a change. (*See [SoLiD - Live Updates](https://github.com/solid/solid-spec#live-updates)*)
 * **PubSubHubbub**: The subscriber discovers the target's hub, and sends a form-encoded `POST` request containing values for `hub.mode` ("subscribe"), `hub.topic` and `hub.callback`. When the target posts new content, the target's server sends a form-encoded `POST` to the hub with values for `hub.mode` ("publish") and `hub.url` and the hub checks the URL for new content and `POST`s updates to the subscriber's callback URL. (*See [PuSH 0.4](http://pubsubhubbub.github.io/PubSubHubbub/pubsubhubbub-core-0.4.html) and [How To Publish And Consume PuSH](http://indiewebcamp.com/How_to_publish_and_consume_PubSubHubbub)*)
 * **Salmentions**: The subscriber creates content that links to the target (eg. a reply) and sends a form-encoded `POST` containing values for `source` and `target` to the target's webmention [webmention](https://indiewebcamp.com/webmention) endpoint. The target verifies the link and includes a link back to the subscriber's source on the target content. The target sends form-encoded `POST` requests containing values for `source` and `target` to the webmention endpoint of every link in the content, including that of the subscriber, to indicate that there has been a change. (*See [webmention](https://indiewebcamp.com/webmention) and [salmentions](https://indiewebcamp.com/salmentions)*)
-
-## Discovery
-
-* different types of feeds (by post type, user curated, by topic)
 
 ## 'What to post'
 
