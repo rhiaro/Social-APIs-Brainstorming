@@ -42,7 +42,7 @@ Upon [discovery](#discovery) of the URL of a content object or stream of content
 
 Each object in a stream MUST have a globally unique identifier (HTTP URI) in the `@id` property, and MAY contain only this identifier, which can be dereferenced to retrieve all properties of an object.
 
-***ISSUE*** *Microformats uses `url` not `@id`*
+> ***ISSUE*** *Microformats uses `url` not `@id`*
 
 **TODO:** Example single object.
 
