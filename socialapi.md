@@ -44,8 +44,8 @@ Each object in a stream MUST have a globally unique identifier (HTTP URI) in the
 
 
 <div class="issue">
-  <strong class="issue-title">ISSUE</strong>
-  <p>Microformats uses `url` not `@id`</p>
+  <div class="issue-title"><span>Issue</span></strong>
+  <div>Microformats uses <code>url</code> not <code>@id</code></div>
 </div>
 
 
