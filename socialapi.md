@@ -4,7 +4,9 @@ layout: default
 
 # The Social API
 
-**Editor's note:** Early draft, based on [Social API Requirements](https://www.w3.org/wiki/Socialwg/Social_API/Requirements); inspired by and borrowing from [ActivityPump](http://w3c-social.github.io/activitypump/), the Indieweb ecosystem (including [Micropub](http://indiewebcamp.com/Micropub) and [Webmention](http://indiewebcamp.com/Webmention)) and [SoLiD](http://linkeddata.github.io/SoLiD/); all are subject to ongoing development. PRs and issues please!.
+## Status of this document
+
+Early working draft, based on [Social API Requirements](https://www.w3.org/wiki/Socialwg/Social_API/Requirements); inspired by and borrowing from [ActivityPump](http://w3c-social.github.io/activitypump/), the Indieweb ecosystem (including [Micropub](http://indiewebcamp.com/Micropub) and [Webmention](http://indiewebcamp.com/Webmention)) and [SoLiD](http://linkeddata.github.io/SoLiD/); all are subject to ongoing development. PRs and issues please!.
 
 ## Overview
 
@@ -17,31 +19,49 @@ People and the content they create are the core componants of the social web; th
 
 regardless of *what that content* is or *where it is stored*.
 
-This provides the core building blocks for interoperable social systems which allow people to express themselves, ideas to be shared, organisations to collaborate, and..
+This provides the core building blocks for interoperable social systems.
 
 This specification is divided into parts that can be implemented independantly as needed, or all together in one system, as well as extended to meet domain-specific requirements. Users can store their social data across any number of compliant servers, and use compliant clients hosted elsewhere to interact with their own content and the content of others. Put simply, this specification tells you:
 
-* given an identifier (URI) for a person (persona/organisation/group/other), how to discover content they have published.
+* how to publish social content, and how to discover content someone has published.
 * how to subscribe to a particular stream or feed of content.
 * what to post, and where to, to create, update or delete content.
 * what to post, and where to, to notify relevant parties of changes to content.
 * what to post, and where to, to notify relevant parties of interactions with content.
 * ...
 
-## Reading
+## Publishing
 
 Upon [discovery](#discovery) of the URL of a content object or stream of content:
 
 * a `GET` retrieves the JSON representation of the object or objects in the stream;
   * in reverse chronological order where applicable;
+  * which SHOULD be structured according to [ActivityStreams](#) (either Activities or Content Objects);
   * which MAY be embedded in a HTML representation of the object or objects;
   * **TODO:** limit/paging
 
+Each object in a stream MUST have a globally unique identifier (HTTP URI) in the `@id` property, and MAY contain only this identifier, which can be dereferenced to retrieve all properties of an object.
+
+<div class="issue">
+  <span class="issue-title">ISSUE</title>
+  <p>Microformats uses `url` not `@id`</p>
+</div>
+
+**TODO:** Example single object.
+
+**TODO:** Example stream of objects.
+
 ## Subscribing
 
-* follow activity
-* PuSH
-*
+An agent (client or server) may wish to be notified of changes to a content object (eg. edits, new replies) or stream of content (eg. objects added or removed from the stream).
+
+Here are some options for indicating this...
+
+* **ActivityPump**: The subscriber posts a `Follow` Activity (JSON object) to the target's `inbox` endpoint, and adds the target to the subscriber's `Following` Collection. The target's server adds the subscriber to the target's `Followers` Collection, and subsequently `POST`s all new activities of the target to the subscriber's `inbox` endpoint. (*See [ActivityPump](http://w3c-social.github.io/activitypump/) 7.4.2, 8 and 9.2.4*)
+* **SoLiD**: The subscriber sends the keyword `sub` followed by an empty space and then the URI of the resource, to the target's websockets URI. The target's server sends a websockets message containing the keyword `pub`, followed by an empty space and the URI of the resource that has changed, whenever there is a change. (*See [SoLiD - Live Updates](https://github.com/solid/solid-spec#live-updates)*)
+* **PubSubHubbub**: The subscriber discovers the target's hub, and sends a form-encoded `POST` request containing values for `hub.mode` ("subscribe"), `hub.topic` and `hub.callback`. When the target posts new content, the target's server sends a form-encoded `POST` to the hub with values for `hub.mode` ("publish") and `hub.url` and the hub checks the URL for new content and `POST`s updates to the subscriber's callback URL. (*See [PuSH 0.4](http://pubsubhubbub.github.io/PubSubHubbub/pubsubhubbub-core-0.4.html) and [How To Publish And Consume PuSH](http://indiewebcamp.com/How_to_publish_and_consume_PubSubHubbub)*)
+* **Salmentions**: The subscriber creates content that links to the target (eg. a reply) and sends a form-encoded `POST` containing values for `source` and `target` to the target's webmention [webmention](https://indiewebcamp.com/webmention) endpoint. The target verifies the link and includes a link back to the subscriber's source on the target content. The target sends form-encoded `POST` requests containing values for `source` and `target` to the webmention endpoint of every link in the content, including that of the subscriber, to indicate that there has been a change. (*See [webmention](https://indiewebcamp.com/webmention) and [salmentions](https://indiewebcamp.com/salmentions)*)
+
 ## Discovery
 
 * different types of feeds (by post type, user curated, by topic)
