@@ -36,7 +36,7 @@ Each stream must have a globally unique identifier (HTTP URI) and MAY be of type
 
 Upon [discovery](#discovery) of the URL of a content object or stream of content:
 
-* a `GET` retrieves the JSON[-LD] representation (or something that can be serialized to JSON[-LD]) of the object or objects in the stream;
+* a `GET` retrieves the JSON[-LD] representation (or something that can be turned into JSON[-LD]) of the object or objects in the stream;
   * which SHOULD/MAY be structured according to [ActivityStreams](#) (either Activities or Content Objects);
   * which MAY be embedded in a HTML representation of the object or objects (eg. via Microformats or RDFa);
   * **TODO:** limit/paging
