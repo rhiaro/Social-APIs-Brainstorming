@@ -6,7 +6,7 @@ layout: default
 
 ## Status of this document
 
-Early working draft, based on [Social API Requirements](https://www.w3.org/wiki/Socialwg/Social_API/Requirements); inspired by and borrowing from [ActivityPump](http://w3c-social.github.io/activitypump/), the Indieweb ecosystem (including [Micropub](http://indiewebcamp.com/Micropub) and [Webmention](http://indiewebcamp.com/Webmention)) and [SoLiD](https://github.com/solid/solid-spec); all are subject to ongoing development. PRs and issues please!.
+Early working draft, based on [Social API Requirements](https://www.w3.org/wiki/Socialwg/Social_API/Requirements); inspired by and borrowing from [ActivityPump](http://w3c-social.github.io/activitypump/), the Indieweb ecosystem (including [Micropub](http://indiewebcamp.com/Micropub) and [Webmention](http://indiewebcamp.com/Webmention)) and [SoLiD](https://github.com/solid/solid-spec); all are subject to ongoing development. PRs and issues please!
 
 ## Overview
 
@@ -30,17 +30,16 @@ This specification is divided into parts that can be implemented independantly a
 * what to post, and where to, to notify relevant parties of interactions with content.
 * ...
 
-## Publishing
-
-Upon [discovery](#discovery) of the URL of a content object or stream of content:
-
-* a `GET` retrieves the JSON representation of the object or objects in the stream;
-  * which SHOULD/MAY be structured according to [ActivityStreams](#) (either Activities or Content Objects);
-  * which MAY be embedded in a HTML representation of the object or objects (eg. via Microformats or RDFa);
-  * **TODO:** limit/paging
+## Publishing and Consuming
 
 Each stream must have a globally unique identifier (HTTP URI) and MAY be of type ActivityStreams `Collection`. Each object in a stream MUST have a globally unique identifier (HTTP URI) in the `@id` property, and MAY contain only this identifier, which can be dereferenced to retrieve all properties of an object.
 
+Upon [discovery](#discovery) of the URL of a content object or stream of content:
+
+* a `GET` retrieves the JSON[-LD] representation (or something that can be serialized to JSON[-LD]) of the object or objects in the stream;
+  * which SHOULD/MAY be structured according to [ActivityStreams](#) (either Activities or Content Objects);
+  * which MAY be embedded in a HTML representation of the object or objects (eg. via Microformats or RDFa);
+  * **TODO:** limit/paging
 
 <div class="issue">
   <div class="issue-title"><span>Issue</span></div>
