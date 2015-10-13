@@ -36,12 +36,12 @@ This specification is divided into parts that can be implemented independantly a
 
 Each stream must have a globally unique identifier (HTTP URI) and MAY be of type ActivityStreams `Collection`. Each object in a stream MUST have a globally unique identifier (HTTP URI) in the `@id` property, and MAY contain only this identifier, which can be dereferenced to retrieve all properties of an object.
 
-Upon [discovery](#discovery) of the URL of a content object or stream of content:
+Upon [discovery](#discovery) of the URL of a content object or stream of content a `GET` retrieves the JSON[-LD] representation of the object or objects in the stream, or an HTML representation from which the equivalent JSON representation can be parsed.
 
-* a `GET` retrieves the JSON[-LD] representation (or something that can be turned into JSON[-LD]) of the object or objects in the stream;
-  * which SHOULD/MAY be structured according to [ActivityStreams](#) (either Activities or Content Objects);
-  * which MAY be embedded in a HTML representation of the object or objects (eg. via Microformats or RDFa);
-  * **TODO:** limit/paging
+A JSON-LD representation which SHOULD be structured according to [ActivityStreams](#) (either Activities or Content Objects), but MAY use other vocabularies.
+ 
+
+**TODO:** limit/paging
 
 <div class="issue">
   <div class="issue-title"><span>Issue</span></div>
