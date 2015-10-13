@@ -35,8 +35,7 @@ This specification is divided into parts that can be implemented independantly a
 Upon [discovery](#discovery) of the URL of a content object or stream of content:
 
 * a `GET` retrieves the JSON representation of the object or objects in the stream;
-  * in reverse chronological order where applicable;
-  * which SHOULD be structured according to [ActivityStreams](#) (either Activities or Content Objects);
+  * which SHOULD/MAY be structured according to [ActivityStreams](#) (either Activities or Content Objects);
   * which MAY be embedded in a HTML representation of the object or objects (eg. via Microformats or RDFa);
   * **TODO:** limit/paging
 
