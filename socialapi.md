@@ -164,12 +164,13 @@ A server may also receive notifications of changes to content it has *not subscr
 
 *(was 'Notifications')*
 
+A user may wish to push a notification to another user, for example because they have linked to (replied, liked, bookmarked, reposted, ...) their content or linked to (tagged, addressed) the user directly.
 
+* **ActivityPump:** When an Activity is posted to a user's `outbox` endpoint, the server checks for values of `object`, `target`, `inReplyTo`, `to`, `cc`, and `bcc`; discovers the `inbox` endpoint of any objects found, and `POST`s the Activity to the discovered `inbox` endpoints. Servers receiving such an Activity proceed to do the same for the target object to propagate the update further. *(See [ActivityPump 8.2](http://w3c-social.github.io/activitypump/#notification))*
+* **Webmention:** The target publishes a link to their 'webmention endpoint' via `rel="webmention"`. The source sends a form-encoded `POST` request containing values for `source` (the URL of a webpage with a link to the target) and `target` (the URL of the webpage being linked to). The target MUST validate that the source really does link to target, and proceeds to do with this information as desired. *(See [webmention](https://indiewebcamp.com/webmention))*
 
-### Propagating content
+*Note: we need to leave it open for users to refuse content they have not explicitly subscribed to, ie. nothing else should rely on implementation of Mentioning.*
 
-* AP section 8, posting to inbox
-* webmentions
 
 ### Updating the social graph
 
