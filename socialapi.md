@@ -6,6 +6,8 @@ layout: default
 
 ## Status of this document
 
+**2015-10-20 Document moved** to [W3C-Social Editor's Draft](http://w3c-social.github.io/SocialAPI/socialapi). This document will no longer be updated.
+
 An overview of the current state of specs that are inputs to the WG: [ActivityPump](http://w3c-social.github.io/activitypump/), the Indieweb ecosystem (including [Micropub](http://indiewebcamp.com/Micropub) and [Webmention](http://indiewebcamp.com/Webmention)) and [SoLiD](https://github.com/solid/solid-spec); all of which are subject to ongoing development. Arranged based on [Social API Requirements](https://www.w3.org/wiki/Socialwg/Social_API/Requirements).
 
 Optimistically, this has the potential to become a unified working draft. Ultimately an implementation of any subsection of this spec should be compatible with the equivalent subsection of one of the aforementioned specs. Sometimes the overlap between spec subsections is unclear (to me), which is where I've written all options out for now.
@@ -124,6 +126,10 @@ When an object is deleted, it SHOULD be replaced with a 'tombstone' containing i
 * **ActivityPump:** `POST` an AS2 `Delete` Activity to the `outbox` endpoint.
 * **Micropub:** `POST` an `mp-delete` action to `rel="micropub"` endpoint.
 * **SoLiD:** `DELETE` on the resource being deleted.
+
+<!--
+Notifications from updates and deletes are SHOULD not MUST to allow for modular implementation. ie. if I delete a post right now, I don't notify anyone, even those mentioned, or who have replied to it. It's not ideal, but the world/web doesn't break. It's linkrot, but we've managed to cope so far...
+-->
 
 ## Discovery
 
