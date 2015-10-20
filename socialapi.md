@@ -25,12 +25,11 @@ This provides the core building blocks for interoperable social systems.
 
 This specification is divided into parts that can be implemented independantly as needed, or all together in one system, as well as extended to meet domain-specific requirements. Users can store their social data across any number of compliant servers, and use compliant clients hosted elsewhere to interact with their own content and the content of others. Put simply, this specification tells you:
 
-* how to [publish](#publishing) social content, and how to [discover](#discovery) content someone has published.
-* how to [subscribe](#subscribing) to a particular stream or feed of content.
-* what to post, and where to, to create, update or delete content.
-* what to post, and where to, to notify relevant parties of changes to content.
-* what to post, and where to, to notify relevant parties of interactions with content.
-* ...
+* how to [expose/consume](#reading) social content (reading), and how to [discover](#discovery) content someone has published.
+* [what to post](#content-representation), and where to, to [create](#creating), [update](#updating) or [delete](#deleting) content.
+* how to [ask for notifications](#subscribing) about content (subscribing).
+* how to [send notifications](#mentioning) about content or users (mentioning).
+* how to expose [profiles](#profiles) and [relationships](#relationships).
 
 ## Reading
 
@@ -171,11 +170,6 @@ A user may wish to push a notification to another user, for example because they
 
 *Note: we need to leave it open for users to refuse content they have not explicitly subscribed to, ie. nothing else should rely on implementation of Mentioning.*
 
-
-### Updating the social graph
-
-side effects, adding to collections etc
-
 ## Profiles
 
 The subject of a profile document can be a person, persona, organisation, bot, location, ...whatever. Each profile document MUST have a globally unique identifier (HTTP URI). Performing a `GET` on a profile document SHOULD return a JSON object containing attributes of the subject of the profile; MAY return objects the subject has created, such as an ActivityStreams `Collection`; and SHOULD return at least one link to a stream of content (see [discovery](#discovery)). The JSON representation of a profile document MAY be parsed from an HTML representation (eg. via Microformats (`h-card`) or RDFa).
@@ -193,8 +187,13 @@ The subject of a profile document can be a person, persona, organisation, bot, l
 
 * **ActivityPump:** When a server receives a `Follow` Activity in its `inbox`, the subject is added to a `Followers` `Collection`, which is discoverable from the subject's profile.
 
-### Authorization
+### Authorization and access control
 
 * Bearer tokens for authentication
 * Leave obtaining the bearer token out of the spec, since there are already several RFCs for ways to obtain bearer tokens.
-* ...access control...
+
+**TODO:** Access control
+
+* **ActivityPump:** see [auth](http://w3c-social.github.io/activitypump/#authorization)
+* **Indieweb:** see [private posts](https://indiewebcamp.com/private_posts), [private webmention](https://indiewebcamp.com/private-webmention)
+* **SoLiD:** see [acl](https://github.com/solid/solid-spec#web-access-control)
