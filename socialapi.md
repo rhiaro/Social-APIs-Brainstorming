@@ -132,13 +132,7 @@ One user may [publish](#publishing) one or more streams of content. Streams may 
 
 `<link rel="feed" href="http://rhiaro.co.uk/tag/socialwg">`
 
-```
-HTTP/1.1 200 OK
-
-....
-
-Link: <http://rhiaro.co.uk/tag/socialwg>; rel="feed"
-```
+```HTTP/1.1 200 OK .... Link: <http://rhiaro.co.uk/tag/socialwg>; rel="feed"```
 
 <div class="issue">
   <div class="issue-title"><span>Issue</span></div>
@@ -170,6 +164,8 @@ A server may also receive notifications of changes to content it has *not subscr
 
 *(was 'Notifications')*
 
+
+
 ### Propagating content
 
 * AP section 8, posting to inbox
@@ -181,7 +177,20 @@ side effects, adding to collections etc
 
 ## Profiles
 
-The subject of a profile document can be a person, persona, organisation, bot, location, ...whatever. Each profile document MUST have a globally unique identifier (HTTP URI). Performing a `GET` on a profile document SHOULD return a JSON object containing attributes of the subject of the profile; MAY return objects the subject has created, such as an ActivityStreams `Collection`; and SHOULD return at least one link to a stream of content (see [discovery](#discovery)). The JSON representation of a profile document MAY be embedded in an HTML representation (eg. via Microformats (`h-card`) or RDFa).
+The subject of a profile document can be a person, persona, organisation, bot, location, ...whatever. Each profile document MUST have a globally unique identifier (HTTP URI). Performing a `GET` on a profile document SHOULD return a JSON object containing attributes of the subject of the profile; MAY return objects the subject has created, such as an ActivityStreams `Collection`; and SHOULD return at least one link to a stream of content (see [discovery](#discovery)). The JSON representation of a profile document MAY be parsed from an HTML representation (eg. via Microformats (`h-card`) or RDFa).
+
+### Relationships
+
+<div class="issue">
+  <div class="issue-title"><span>Issue</span></div>
+  <div>Unsolved...</div>
+</div>
+
+*Note: a user should not be required to publish their friends/followers, or may selectively publish them. However, if they're going to (which is useful for eg. switching readers without having to resubscribe to everyone) we should make sure there's a standard way of doing it.*
+
+*Note: I think defining a vocabulary for types of relationships is out of scope and generally not very useful.*
+
+* **ActivityPump:** When a server receives a `Follow` Activity in its `inbox`, the subject is added to a `Followers` `Collection`, which is discoverable from the subject's profile.
 
 ### Authorization
 
